@@ -5,11 +5,16 @@
 branches:
   only:
     - master
+
+# we forked from the 1.7.1 release, so all of our builds will be 1.7.1.x
+# note that this is shorthand for APPVEYOR_BUILD_VERSION
 version: 1.7.1.{build}
 
 pull_requests:
   do_not_increment_build_number: true
 
+# foreach sdk-style project, update the version fields to 1.7.1.{build}
+# this can also be done with assemblyinfo.cs if that's appropriate for your project
 dotnet_csproj:
   patch: true
   file: '**\*.csproj'
@@ -41,6 +46,8 @@ before_build:
 build:
   project: .\Source\SharpVectors.sln
 
+# this project uses nuget pack instead of relying on msbuild packing.
+# it's possible to set up your build step to produce packages.
 after_build:
   - ps: nuget pack ".\Source\SharpVectors.nuspec" -Properties "version=$env:APPVEYOR_BUILD_VERSION"
 
@@ -48,12 +55,19 @@ after_build:
 #      packaging artifacts        #
 #---------------------------------#
 
+# take the nupkg from the root directory and add it to the appveyor artifacts for this build
+# in the case of this project, they also store old packages in the nuget\ folder, so we only match
+# on packages in the root directory
 artifacts:
   - path: '.\*.nupkg'
 
 #---------------------------------#
 #     deployment configuration    #
 #---------------------------------#
+
+# this deploys all of the artifacts packaged in the previous step to nuget if the build is happening on master
+# the api key is encrypted.
+# this deployment section is not at all customized for this particular repository.
 deploy:
 - provider: NuGet
   server: https://artifactory.articulate.com/artifactory/api/nuget/nuget-local
