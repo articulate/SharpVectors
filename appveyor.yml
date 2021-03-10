@@ -32,8 +32,8 @@ platform:
 configuration:
   - Release
 
-  before_build:
-    - ps: nuget restore .\Source\SharpVectors.sln
+before_build:
+  - ps: nuget restore .\Source\SharpVectors.sln
 
 build:
   project: .\Source\SharpVectors.sln
