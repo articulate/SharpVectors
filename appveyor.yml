@@ -9,7 +9,7 @@ version: 0.0.0.{build}
 
 dotnet_csproj:
   patch: true
-  file: '.\Source\**\*.csproj'
+  file: '**\*.csproj'
   version: '{version}'
   package_version: '{version}'
   file_version: '{version}'
@@ -39,7 +39,7 @@ build:
   project: .\Source\SharpVectors.sln
 
 after_build:
-  - ps: nuget pack ".\Source\SharpVectors.nuspec" -Properties "version=0"
+  - ps: nuget pack ".\Source\SharpVectors.nuspec" -Properties "version=$env:APPVEYOR_BUILD_VERSION"
 
 #---------------------------------#
 #      packaging artifacts        #
