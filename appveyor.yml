@@ -9,7 +9,7 @@ version: 0.0.0.{build}
 
 dotnet_csproj:
   patch: true
-  file: '**\*.csproj'
+  file: '.\Source\**\*.csproj'
   version: '{version}'
   package_version: '{version}'
   file_version: '{version}'
@@ -46,7 +46,7 @@ after_build:
 #---------------------------------#
 
 artifacts:
-  - path: '**\*.nupkg'
+  - path: '.\*.nupkg'
 
 #---------------------------------#
 #     deployment configuration    #
