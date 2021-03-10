@@ -52,10 +52,11 @@ artifacts:
 #     deployment configuration    #
 #---------------------------------#
 deploy:
-  - provider: NuGet
-    api_key:
-      secure: <your secret here>
-    skip_symbols: true
-    artifact: /.*\.nupkg/
-    on:
-      APPVEYOR_REPO_TAG: true
+- provider: NuGet
+  server: https://artifactory.articulate.com/artifactory/api/nuget/nuget-local
+  api_key:
+    secure: I2fPs5m1kSHTtbHd03Lu+cM8KGP97xPnopLZ6OVhoLMRWfVy/cEcVp0BKYB3bf3gT/Zp1qp3tRfFfpAvwy6jNcmY6pI3Y1fWoKd6BVyutj1kz+3BQVkbU3CKTh5VyyvO6OZBS/MSlqSs8c7SVaqZwiMaDOUwAKU23gKjnGKpKCc=
+  skip_symbols: true
+  artifact: PackageFile
+  on:
+    branch: master
