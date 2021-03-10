@@ -39,7 +39,7 @@ build:
   project: .\Source\SharpVectors.sln
 
 after_build:
-  - ps: nuget pack ".\Source\SharpVectors.nuspec"
+  - ps: nuget pack ".\Source\SharpVectors.nuspec" -Properties "version=0"
 
 #---------------------------------#
 #      packaging artifacts        #
