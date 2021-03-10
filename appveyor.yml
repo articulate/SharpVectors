@@ -32,11 +32,14 @@ platform:
 configuration:
   - Release
 
+  before_build:
+    - ps: nuget restore .\Source\SharpVectors.sln
+
 build:
-  project: Source\SharpVectors.sln
+  project: .\Source\SharpVectors.sln
 
 after_build:
-  - ps: nuget pack "Source\SharpVectorsReloaded.nuspec" -Properties "version=0.0.0.0"
+  - ps: nuget pack ".\Source\SharpVectorsReloaded.nuspec" -Properties "version=0.0.0.0"
 
 #---------------------------------#
 #      packaging artifacts        #
