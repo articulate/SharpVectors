@@ -23,7 +23,7 @@ assembly_info:
 #---------------------------------#
 
 image:
-- Visual Studio 2017
+- Visual Studio 2019
 
 #---------------------------------#
 #       build configuration       #
