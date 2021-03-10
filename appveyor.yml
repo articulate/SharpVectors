@@ -5,18 +5,16 @@
 branches:
   only:
     - master
-
+version: 0.0.0.{build}
 install:
-  - choco install gitversion.portable -y
-  - ps: gitversion /l console /output buildserver
-  - ps: Update-AppveyorBuild -Version $GitVersion_FullSemVer
+  - ps: Update-AppveyorBuild -Version $(version)
 
 assembly_info:
   patch: true
   file: AssemblyInfo.cs
-  assembly_version: $(GitVersion_AssemblySemVer)
-  assembly_file_version: $(GitVersion_MajorMinorPatch).$(APPVEYOR_BUILD_NUMBER)
-  assembly_informational_version: $(GitVersion_InformationalVersion)
+  assembly_version: $(version)
+  assembly_file_version: $(version)
+  assembly_informational_version: $(version)
   
 #---------------------------------#
 #    environment configuration    #
@@ -39,7 +37,7 @@ build:
   project: Source\SharpVectors.sln
 
 after_build:
-  - ps: nuget pack "Source\SharpVectorsReloaded.nuspec" -Properties "version=$env:GitVersion_NuGetVersionV2"
+  - ps: nuget pack "Source\SharpVectorsReloaded.nuspec" -Properties "version=0.0.0.0"
 
 #---------------------------------#
 #      packaging artifacts        #
