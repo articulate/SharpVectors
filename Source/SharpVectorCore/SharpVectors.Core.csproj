@@ -10,6 +10,7 @@
     <OutputType>Library</OutputType>
     <IsPackable>false</IsPackable>
     <Configurations>Debug;Release</Configurations>
+    <noWarn>1587,1570,1572,1573,1574,1591</noWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>DEBUG;TRACE</DefineConstants>
